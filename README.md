@@ -1,32 +1,37 @@
-Massively by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+# Sajal Agarwal - Personal Portfolio
 
+Welcome to the repository for my personal portfolio website!
 
-This is Massively, a text-heavy, article-oriented design built around a huge background
-image (with a new parallax implementation I'm testing) and scroll effects (powered by
-Scrollex). A *slight* departure from all the one-pagers I've been doing lately, but one
-that fulfills a few user requests and makes use of some new techniques I've been wanting
-to try out. Enjoy it :)
+## About
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+I am a **Senior Data Scientist** with 15+ years of experience in Machine Learning, Cloud Analytics, and Generative AI. 
+This repository contains the source code for my personal portfolio, where I showcase my projects, professional experience, and education.
 
-(* = not included)
+## Links
 
-AJ
-aj@lkn.io | @ajlkn
+- **LinkedIn:** [Sajal Agarwal](https://www.linkedin.com/in/agarwalsajal/)
+- **GitHub:** [@Sajalagarwal-ca](https://github.com/Sajalagarwal-ca)
 
+## Projects Highlighted
 
-Credits:
+Some of the key projects featured in this portfolio include:
+- **Forecast Home Prices in Canada** (Linear Regression)
+- **Cloud Cost Anomaly Detection & Optimization**
+- **Time Series Forecasting for Cloud Chargeback**
+- **Fraudulent Loan Application Detection**
+- **AI Travel Assistant** (LLM-Powered)
+- **Insurance Fraud Investigation** (RAG)
+- **Executive Dashboards** (Power BI & Tableau)
 
-	Demo Images:
-		Unsplash (unsplash.com)
+## Tech Stack
 
-	Icons:
-		Font Awesome (fontawesome.io)
+This website is built using:
+- HTML5 / CSS3
+- JavaScript (jQuery)
+- Custom CSS and responsive design based on the [Massively](https://html5up.net/massively) template by HTML5 UP.
 
-	Other:
-		jQuery (jquery.com)
-		Scrollex (github.com/ajlkn/jquery.scrollex)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+## Local Development
+
+To view or modify this website locally:
+1. Clone this repository: `git clone https://github.com/Sajalagarwal-ca/portfolio.github.io.git`
+2. Open `index.html` in your preferred web browser.
