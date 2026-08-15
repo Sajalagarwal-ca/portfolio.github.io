@@ -21,8 +21,83 @@
 			box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
 		}
 
+		.profile-pic-link {
+			display: inline-block;
+			position: relative;
+			cursor: pointer;
+			border-bottom: none;
+		}
+
+		.profile-pic-link::after {
+			content: "\f04b";
+			font-family: "Font Awesome 5 Free";
+			font-weight: 900;
+			position: absolute;
+			right: 6px;
+			bottom: 18px;
+			width: 36px;
+			height: 36px;
+			line-height: 36px;
+			text-align: center;
+			border-radius: 50%;
+			background: rgba(220, 40, 40, 0.9);
+			color: #ffffff;
+			font-size: 0.8rem;
+			padding-left: 3px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		}
+
+		.profile-pic-link:hover .profile-pic {
+			border-color: rgba(255, 255, 255, 0.85);
+		}
+
+		.resume-download {
+			margin: 0.25rem 0 1rem 0;
+		}
+
 		#intro {
 			text-align: center;
+		}
+
+		/* YouTube modal */
+		.video-modal {
+			display: none;
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.85);
+			z-index: 10000;
+			align-items: center;
+			justify-content: center;
+			padding: 2rem;
+		}
+
+		.video-modal.is-open {
+			display: flex;
+		}
+
+		.video-modal-inner {
+			position: relative;
+			width: 100%;
+			max-width: 960px;
+			aspect-ratio: 16 / 9;
+			background: #000;
+		}
+
+		.video-modal-inner iframe {
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+
+		.video-modal-close {
+			position: absolute;
+			top: -2.25rem;
+			right: 0;
+			background: transparent;
+			border: 0;
+			color: #ffffff;
+			font-size: 1.5rem;
+			cursor: pointer;
 		}
 
 		.pdf-preview {
@@ -66,16 +141,34 @@
 
 		<!-- Intro -->
 		<div id="intro">
-			<img src="images/profile-pic.jpg" alt="Sajal Agarwal" class="profile-pic" />
+			<!-- Click profile picture to play YouTube video. Change data-video-id to swap videos. -->
+			<a href="#" class="profile-pic-link" id="profile-video-trigger" data-video-id="HL_93NOCiLU"
+				aria-label="Play intro video">
+				<img src="images/profile-pic.jpg" alt="Sajal Agarwal" class="profile-pic" />
+			</a>
 			<h1>Sajal Agarwal<br />
 				Portfolio</h1>
 			<p>Senior Data Scientist with 15+ years of experience in Machine Learning,<br />
 				Cloud Analytics &amp; Generative AI &nbsp;
 				<a href="https://www.linkedin.com/in/agarwalsajal/">@Sajal</a>
 			</p>
+			<ul class="actions resume-download">
+				<li><a href="images/Sajal_Agarwal_Resume.pdf" class="button primary icon solid fa-download"
+						download>Download Resume</a></li>
+			</ul>
 			<ul class="actions">
 				<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 			</ul>
+		</div>
+
+		<!-- YouTube Video Modal -->
+		<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+			<div class="video-modal-inner">
+				<button class="video-modal-close" id="video-modal-close" aria-label="Close video">&times;</button>
+				<iframe id="video-modal-iframe" src="" title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe>
+			</div>
 		</div>
 
 		<!-- Header -->
@@ -89,6 +182,8 @@
 				<li class="active"><a href="index.html">Projects</a></li>
 				<li><a href="experience.html">Experience</a></li>
 				<li><a href="education.html">Education</a></li>
+				<li><a href="certifications.html">Certifications</a></li>
+				<li><a href="blog.html">Blog</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="https://www.linkedin.com/in/agarwalsajal/" class="icon brands fa-linkedin"
@@ -354,6 +449,38 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		(function () {
+			var trigger = document.getElementById('profile-video-trigger');
+			var modal = document.getElementById('video-modal');
+			var closeBtn = document.getElementById('video-modal-close');
+			var iframe = document.getElementById('video-modal-iframe');
+			if (!trigger || !modal || !iframe) return;
+
+			function openModal(e) {
+				if (e) e.preventDefault();
+				var videoId = trigger.getAttribute('data-video-id');
+				if (!videoId) return;
+				iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(videoId) +
+					'?autoplay=1&rel=0';
+				modal.classList.add('is-open');
+			}
+
+			function closeModal() {
+				modal.classList.remove('is-open');
+				iframe.src = '';
+			}
+
+			trigger.addEventListener('click', openModal);
+			closeBtn.addEventListener('click', closeModal);
+			modal.addEventListener('click', function (e) {
+				if (e.target === modal) closeModal();
+			});
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') closeModal();
+			});
+		})();
+	</script>
 
 </body>
 
