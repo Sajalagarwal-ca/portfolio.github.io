@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A Power BI case study on building a snapshot-aware application data-quality report.">
+  <title>Application Data Quality | Power BI Case Study</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172b3a;
+      --muted: #526575;
+      --blue: #174b70;
+      --teal: #117c80;
+      --line: #d7e2e9;
+      --wash: #f2f7fa;
+      --accent: #d8a833;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font: 16px/1.65 "Segoe UI", Arial, sans-serif;
+    }
+
+    main {
+      width: min(100% - 2rem, 980px);
+      margin: 3rem auto;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { max-width: 780px; margin: .5rem 0 1rem; font-size: clamp(2.2rem, 6vw, 4rem); letter-spacing: -.04em; }
+    h2 { margin-top: 2.6rem; color: var(--blue); font-size: 1.65rem; }
+    h3 { margin-bottom: .35rem; font-size: 1.05rem; }
+    p, li { color: var(--muted); }
+    strong { color: var(--ink); }
+
+    .intro { max-width: 760px; font-size: 1.18rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; }
+    .tags li { padding: .28rem .7rem; border: 1px solid var(--line); border-radius: 999px; color: var(--blue); font-size: .86rem; }
+
+    .summary, .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .summary { margin: 2rem 0; }
+    .summary div, .card { padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: .8rem; background: #fff; }
+    .summary dt { color: var(--muted); font-size: .82rem; }
+    .summary dd { margin: .2rem 0 0; font-weight: 650; }
+    .card { background: var(--wash); }
+    .card p { margin-bottom: 0; }
+
+    .callout { padding: 1rem 1.2rem; border-left: 4px solid var(--accent); border-radius: .35rem; background: #fff8e8; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .55rem;
+      margin: 1.4rem 0;
+      align-items: stretch;
+    }
+
+    .flow div {
+      display: grid;
+      min-height: 112px;
+      place-content: center;
+      padding: .85rem;
+      border: 1px solid var(--line);
+      border-radius: .7rem;
+      background: var(--wash);
+      text-align: center;
+    }
+
+    .flow strong { display: block; color: var(--blue); }
+    .flow span { color: var(--muted); font-size: .82rem; }
+    .flow .arrow { display: none; }
+
+    a { color: var(--blue); }
+    a:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+    figure { margin: 2rem 0; }
+    figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: .8rem; }
+    figcaption { margin-top: .75rem; color: var(--muted); font-size: .88rem; }
+    .small { font-size: .88rem; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+
+    @media (max-width: 700px) {
+      main { margin: 1.5rem auto; }
+      .summary, .cards { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .flow div { min-height: 76px; }
+      .flow .arrow { display: block; min-height: auto; padding: 0; border: 0; background: transparent; color: var(--teal); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="index.html" target="_top">Back to projects</a>
+      <div class="eyebrow">Power BI · Data Quality · Data Modeling</div>
+      <h1>Turning daily snapshots into trusted data-quality insights</h1>
+      <p class="intro">I built and stabilized a Power BI application-data-quality report so teams could assess application completeness and business-rule compliance across daily snapshots—not just a single day.</p>
+      <ul class="tags" aria-label="Project technologies">
+        <li>Power BI</li><li>Power Query (M)</li><li>DAX</li><li>SQL</li><li>Incremental Refresh</li>
+      </ul>
+      <dl class="summary">
+        <div><dt>My role</dt><dd>Power BI development, modeling, validation</dd></div>
+        <div><dt>Focus</dt><dd>Snapshot-grain correctness and refresh stability</dd></div>
+        <div><dt>Source pattern</dt><dd>Application inventory and daily quality snapshots</dd></div>
+        <div><dt>Project status</dt><dd>Core model fixes implemented; follow-up proposals tracked</dd></div>
+      </dl>
+    </header>
+
+    <figure aria-labelledby="report-caption">
+      <a href="images/power-bi-data-completeness.png" target="_blank" rel="noopener"
+        aria-label="Open the Power BI report screenshot at full size">
+        <img src="images/power-bi-data-completeness.png" width="1392" height="768"
+          alt="APM Data Completeness report showing 94 percent populated and 6 percent not populated for the displayed snapshot, a segment comparison, and attribute-level application counts">
+      </a>
+      <figcaption id="report-caption">A point-in-time view of application data completeness: date and attribute filters help teams locate missing information, compare segments, and inspect attribute-level counts. The displayed 94% populated and 6% not populated describe this screenshot only, not a measured improvement. Select the image to view it at full size.</figcaption>
+    </figure>
+
+    <section aria-labelledby="challenge">
+      <h2 id="challenge">The challenge</h2>
+      <p>The original report treated application ID as unique. When history was introduced, the same application appeared once per snapshot date. That broke the model’s key assumption and made it possible for historical rows to be joined or aggregated as if they belonged to one current snapshot.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Keys and relationships</h3>
+          <p>Application IDs repeated across dates, preventing a valid one-to-many relationship at the new snapshot grain.</p>
+        </article>
+        <article class="card">
+          <h3>Cross-date lookups</h3>
+          <p>Quality checks that reference completeness attributes needed to retrieve values from the matching snapshot.</p>
+        </article>
+        <article class="card">
+          <h3>Misleading totals</h3>
+          <p>Some measures could aggregate multiple dates, while incomplete relationship paths repeated grand totals across attributes.</p>
+        </article>
+        <article class="card">
+          <h3>Refresh pressure</h3>
+          <p>Large historical queries also needed careful date filtering and staged refresh optimization.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="solution">
+      <h2 id="solution">The solution</h2>
+      <p>I treated the application on a given date as the reporting entity, then carried that grain consistently through source transformations, model relationships, measures, and validation.</p>
+      <ol>
+        <li><strong>Created a composite snapshot key.</strong> Application ID plus snapshot date forms a unique <code>AppKey</code>, preserving history without collapsing multiple days into one record.</li>
+        <li><strong>Made Power Query date-aware.</strong> Source queries filter a configurable date range, deduplicate at the correct grain, normalize date types, and include snapshot date in related-field joins.</li>
+        <li><strong>Repaired filter paths.</strong> The model relates application snapshots to completeness and quality facts and connects the date dimension to the snapshot date.</li>
+        <li><strong>Added validation.</strong> Diagnostic measures check row counts, matching keys, and filter propagation; report checks confirm that attribute-level results are not simply repeated grand totals.</li>
+        <li><strong>Tuned refresh deliberately.</strong> Incremental Refresh and controlled query parallelism reduce unnecessary work, while database-side optimizations remain coordinated follow-ups.</li>
+      </ol>
+      <div class="flow" role="img" aria-label="Data flow from enterprise architecture source through SQL snapshots and Power Query to a Power BI model and report">
+        <div><strong>Source</strong><span>Architecture records</span></div>
+        <div><strong>SQL snapshots</strong><span>Date-range data</span></div>
+        <div><strong>Power Query</strong><span>Typed dates · AppKey · same-day joins</span></div>
+        <div><strong>Semantic model</strong><span>Application · completeness · quality</span></div>
+        <div><strong>Report</strong><span>Completeness · compliance · issue detail</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="proof">
+      <h2 id="proof">How I validated it</h2>
+      <ul>
+        <li>Checked that application-snapshot keys match across related tables.</li>
+        <li>Confirmed completeness values vary by attribute instead of showing the same total on every row.</li>
+        <li>Verified that quality-rule lookups use the completeness value from the same snapshot date.</li>
+        <li>Used key-coverage diagnostics to surface missing source records for upstream investigation.</li>
+        <li>Tested date filtering against the intended snapshot.</li>
+      </ul>
+      <p class="callout"><strong>Results and scope:</strong> The core snapshot-model fixes, date-aware transformations, relationship corrections, and diagnostics are implemented. No verified before/after refresh benchmark is available, so this case study makes no refresh-speed improvement claim.</p>
+    </section>
+
+    <section aria-labelledby="takeaways">
+      <h2 id="takeaways">What I learned</h2>
+      <div class="cards">
+        <article class="card"><h3>Model the true grain</h3><p>If the source captures an entity once per day, the date is part of its identity for historical reporting.</p></article>
+        <article class="card"><h3>Join on time as well as entity</h3><p>Historical lookups must match both the business key and the snapshot date.</p></article>
+        <article class="card"><h3>Prove filter behavior</h3><p>Diagnostics and reconciliation checks expose modeling defects that a visual alone can hide.</p></article>
+        <article class="card"><h3>Share performance ownership</h3><p>Report-side tuning helps, but source indexing, capacity, and materialization may need database-owner support.</p></article>
+      </div>
+    </section>
+
+    <footer>
+      <p class="small"><strong>Follow-up work:</strong> The selected-snapshot DAX rewrite and some database/refresh work are documented as proposed or pending, not as completed changes.</p>
+    </footer>
+  </main>
+</body>
+</html>

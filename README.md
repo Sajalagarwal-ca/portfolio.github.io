@@ -22,6 +22,7 @@ Some of the key projects featured in this portfolio include:
 - **AI Travel Assistant** (LLM-Powered)
 - **Insurance Fraud Investigation** (RAG)
 - **Executive Dashboards** (Power BI & Tableau)
+- **[Application Data Quality](./power-bi-data-quality.html)** (Power BI, Power Query, DAX, SQL): snapshot-aware modeling, completeness reporting, and validation. The project card opens a case-study dialog, with a standalone page available without JavaScript. The report screenshot is a static preview, not a live Power BI embed.
 
 ## Tech Stack
 

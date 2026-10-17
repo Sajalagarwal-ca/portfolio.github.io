@@ -131,6 +131,50 @@
 			text-transform: uppercase;
 			pointer-events: none;
 		}
+
+		.project-story-dialog {
+			width: calc(100% - 2rem);
+			max-width: 1100px;
+			height: calc(100% - 2rem);
+			max-height: 900px;
+			padding: 0;
+			border: 0;
+			background: #ffffff;
+		}
+
+		.project-story-dialog::backdrop {
+			background: rgba(0, 0, 0, 0.85);
+		}
+
+		.project-story-dialog[open] {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.project-story-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			padding: 0.75rem 1rem;
+			border-bottom: 1px solid #eeeeee;
+		}
+
+		.project-story-toolbar h2 {
+			margin: 0;
+			font-size: 0.85rem;
+		}
+
+		.project-story-dialog iframe {
+			flex: 1;
+			min-height: 0;
+			width: 100%;
+			border: 0;
+		}
+
+		body.has-project-story {
+			overflow: hidden;
+		}
 	</style>
 </head>
 
@@ -312,6 +356,26 @@
 				</article>
 				<article>
 					<header>
+						<h2><a href="power-bi-data-quality.html" data-project-story>Application Data Quality<br />
+								(Power BI)</a></h2>
+					</header>
+					<a href="power-bi-data-quality.html" class="image fit" data-project-story
+						aria-label="Read the story behind the Power BI application data-quality report">
+						<img src="images/power-bi-data-completeness.png" width="1392" height="768"
+							style="height: auto;" alt="Power BI application data-completeness report with snapshot-date and attribute filters, completeness indicators, and a segment breakdown" loading="lazy" />
+					</a>
+					<p>Built a snapshot-aware Power BI model for application completeness and business-rule compliance.
+						Used Power Query, DAX, and SQL to align daily snapshots, correct relationship filter paths,
+						and validate data coverage.</p>
+					<ul class="actions special">
+						<li><a href="power-bi-data-quality.html" class="button" data-project-story>Read Project Story</a></li>
+						<li><a href="https://thepracticaldatascientist.blogspot.com/2026/10/power-bi-data-modeling-data-quality-my.html"
+								class="button" target="_blank" rel="noopener noreferrer"
+								aria-label="Read the Power BI article on Data Science, AI &amp; Analytics Insights">Read Blog</a></li>
+					</ul>
+				</article>
+				<article>
+					<header>
 						<h2><a href="https://github.com/Sajalagarwal-ca/langchain_query_NL_PostgreSQL_DB"
 								target="_blank">Natural Language Query<br />
 								PostgreSQL Database</a></h2>
@@ -487,6 +551,14 @@
 
 	</div>
 
+	<dialog class="project-story-dialog" id="project-story-dialog" aria-labelledby="project-story-title">
+		<div class="project-story-toolbar">
+			<h2 id="project-story-title">Power BI Project Story</h2>
+			<button type="button" id="project-story-close" autofocus>Close</button>
+		</div>
+		<iframe id="project-story-frame" title="Power BI application data-quality case study"></iframe>
+	</dialog>
+
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
@@ -495,6 +567,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="assets/js/project-story.js"></script>
 	<script>
 		(function () {
 			var trigger = document.getElementById('profile-video-trigger');
