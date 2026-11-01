@@ -22,7 +22,6 @@ IMG = ROOT / "images" / "ai-cost"
 BUILD = ROOT / "tools" / "_build"
 BUILD.mkdir(parents=True, exist_ok=True)
 OUT = BUILD / "ai_cost_observability_blog_google_blogger.html"
-PAGE = ROOT / "ai-cost-observability.html"
 
 NAVY, TEAL, DEEP, INK, GREY = "#13324c", "#007985", "#006a79", "#23384d", "#5f7383"
 LINE, PALE, AMBER = "#d9e5eb", "#f2f8f9", "#b8720a"
@@ -338,50 +337,19 @@ parts.append(
 
 TITLE = "Three AI Products, Three Billing Models, One Dashboard"
 
-# One block element per line keeps the generated files reviewable in an editor
+# One block element per line keeps the generated file reviewable in an editor
 # and in git diffs. HTML ignores the newlines between block elements.
 article = (f'<article style="{BODY};margin:0 auto;max-width:960px;'
            f'overflow-wrap:break-word;text-align:left">\n'
            + "\n".join(parts) + "\n</article>\n")
 
-# ---- 1. Blogger fragment: self-contained, base64 images -------------------- #
+# Blogger fragment: self-contained, base64 images.
+# This is the only output. The post is published at the URL above, so there is
+# no second standalone copy to drift out of sync with it.
 blogger = article
 for png in sorted(IMG.glob("ai-cost-*.png")):
     blogger = blogger.replace(f"@@IMG:{png.name}@@", b64(png.name))
 OUT.write_bytes(blogger.encode("utf-8"))
-
-# ---- 2. Standalone page: relative image paths, full document --------------- #
-page_article = article
-for png in sorted(IMG.glob("ai-cost-*.png")):
-    page_article = page_article.replace(f"@@IMG:{png.name}@@", f"images/ai-cost/{png.name}")
-
-page = f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="How Gen AI, GitHub Copilot and Copilot Studio spend \u2014 three incompatible billing models \u2014 were unified into one cost-centre-level Grafana dashboard.">
-  <title>{TITLE} | Grafana AI Cost Observability</title>
-  <style>
-    body {{ background:#fff; margin:0; padding:clamp(24px,5vw,56px) clamp(16px,4vw,32px); }}
-    .backlink {{ display:block; max-width:960px; margin:0 auto 28px;
-                 font:600 14px/1.5 {SANS}; color:{TEAL}; text-decoration:none; }}
-    .backlink:hover {{ text-decoration:underline; }}
-    .pdflink {{ display:inline-block; margin:0 0 8px; font:600 15px/1.5 {SANS};
-                color:{DEEP}; }}
-  </style>
-</head>
-<body>
-<a class="backlink" href="index.html">&larr; Back to portfolio</a>
-{page_article}
-<p style="max-width:960px;margin:28px auto 0;font:400 15px/1.7 {SANS};color:{GREY}">
-  Prefer a document? <a class="pdflink" href="images/Grafana_AI_Cost_Observability.pdf"
-  target="_blank" rel="noopener noreferrer">Read the full project PDF &rarr;</a>
-</p>
-</body>
-</html>
-"""
-PAGE.write_bytes(page.encode("utf-8"))
 
 # ---- Verify the Blogger constraints ---------------------------------------- #
 checks = {
@@ -391,10 +359,9 @@ checks = {
     "@media": blogger.count("@media"),
     "<script": blogger.count("<script"),
     "remote src=http": blogger.count('src="http'),
-    "unresolved @@IMG tokens": blogger.count("@@IMG:") + page.count("@@IMG:"),
+    "unresolved @@IMG tokens": blogger.count("@@IMG:"),
 }
 print(f"{OUT.name}  ({len(blogger)/1024:,.0f} KB, {blogger.count(chr(10)):,} lines)  [Blogger fragment]")
 for k, v in checks.items():
     print(f"  {'OK ' if v == 0 else 'FAIL'} {k}: {v}")
 print(f"  embedded images: {blogger.count('src=\"data:image/png;base64,')}")
-print(f"{PAGE.name}  ({len(page)/1024:,.0f} KB)  [standalone page, relative images]")
