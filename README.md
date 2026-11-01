@@ -23,6 +23,39 @@ Some of the key projects featured in this portfolio include:
 - **Insurance Fraud Investigation** (RAG)
 - **Executive Dashboards** (Power BI & Tableau)
 - **[Application Data Quality](./power-bi-data-quality.html)** (Power BI, Power Query, DAX, SQL): snapshot-aware modeling, completeness reporting, and validation. The project card opens a case-study dialog, with a standalone page available without JavaScript. The report screenshot is a static preview, not a live Power BI embed.
+- **Grafana AI Cost Observability** (Grafana, PostgreSQL, Azure Data Factory, Python): unifies Gen AI, GitHub Copilot and Copilot Studio spend into one cost-centre-level dashboard.
+
+## Build Tools
+
+`tools/` holds the generators for the Grafana AI Cost Observability assets. Run in order:
+
+```bash
+python tools/redact_screenshots.py    # 1. sanitise raw Grafana screenshots
+python tools/build_ai_cost_pdf.py     # 2. images/Grafana_AI_Cost_Observability.pdf
+python tools/build_ai_cost_blog.py    # 3. blog post, both variants
+```
+
+`build_ai_cost_blog.py` writes the same article twice:
+
+| Output | Images | Use |
+|---|---|---|
+| `ai-cost-observability.html` | relative paths, 28 KB | Standalone local copy of the post (not linked from the index) |
+| `tools/_build/ai_cost_observability_blog_google_blogger.html` | base64, ~1.1 MB | Paste into Blogger's HTML view. Scratch output, gitignored |
+
+The post is published at
+[thepracticaldatascientist.blogspot.com](https://thepracticaldatascientist.blogspot.com/2026/11/grafana-postgresql-azure-data-factory.html),
+which is where the index's **Read Blog** button points.
+
+**`redact_screenshots.py` must run first** — the PDF and blog builders consume only its
+output in `images/ai-cost/`, never the raw screenshots. It permanently black-boxes
+personal data (names, emails, employee IDs), blurs absolute financial values, and
+downsamples to 1200px so residual small text is unresolvable. Requires `pillow`
+and `reportlab`.
+
+The blog file is a **Blogger-safe body fragment**: no `<!DOCTYPE>`/`<html>`/`<head>`/
+`<body>`, no `<style>` block (all CSS is inline), no HTML comments, and all images
+embedded as base64. Paste it into Blogger's HTML view and publish without switching
+to Compose.
 
 ## Tech Stack
 
