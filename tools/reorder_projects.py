@@ -14,22 +14,27 @@ from pathlib import Path
 INDEX = Path(__file__).resolve().parent.parent / "index.html"
 
 # (unique substring found in that card, label, date)  -- newest first
+#
+# NOTE: this is date-ordered EXCEPT for two deliberate pins:
+#   - Cloud Cost Anomaly Detection at position 3 (flagship, $12.8M CAD savings)
+#   - Credit Risk Modeling at position 4 (featured ML/risk project)
+# Both sit above their chronological position by design.
 ORDER = [
     ("Grafana_AI_Cost_Observability", "Grafana AI Cost Observability",   "2026-11-01"),
     ("Azure_FinOps_Chargeback",       "Azure Cost Management FinOps",    "2026-11-01"),
+    ("UwXeLa8KHjk",                   "Cloud Cost Anomaly Detection",    "2026-02-22  (pinned)"),
+    ("Credit_Risk_Model_Portfolio",   "Credit Risk Modeling",            "2026-05-18  (pinned)"),
     ("One_API_Agent",                 "ONE API Agent",                   "2026-11-01"),
     ("power-bi-data-completeness",    "Application Data Quality",        "2026-10-17"),
     ("Grafana_Query_Performance",     "Grafana Query Performance",       "2026-08-24"),
     ("Shopping_Agent.pdf",            "AI Shopping Agent",               "2026-08-23"),
     ("Telecom_Agent.pdf",             "RAG Telecom Agent",               "2026-08-23"),
     ("Healthcare_premium_predictor",  "Healthcare Premium Calculator",   "2026-05-18"),
-    ("Credit_Risk_Model_Portfolio",   "Credit Risk Modeling",            "2026-05-18"),
     ("RAG-Document-reader",           "RAG Document Reader",             "2026-03-13"),
     ("langchain_query_NL_PostgreSQL", "NL Query PostgreSQL",             "2026-03-12"),
     ("HL_93NOCiLU",                   "Fraudulent Loan Detection",       "2026-03-06"),
     ("expense management.jpg",        "Expense Management System",       "2026-03-06"),
     ("kycgobofe80",                   "Forecast Home Prices",            "2026-03-02"),
-    ("UwXeLa8KHjk",                   "Cloud Cost Anomaly Detection",    "2026-02-22"),
 ]
 
 # NOTE: index.html also contains one HTML comment (around line 496) wrapping
