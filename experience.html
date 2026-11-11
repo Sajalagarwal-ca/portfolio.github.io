@@ -39,6 +39,15 @@
 			font-size: 0.95rem;
 			margin-bottom: 0;
 		}
+
+		.experience-entry ul {
+			font-size: 0.95rem;
+			margin-bottom: 0;
+		}
+
+		.experience-entry li {
+			margin-bottom: 0.4rem;
+		}
 	</style>
 </head>
 
@@ -79,45 +88,64 @@
 				<header class="major">
 					<h1>Professional<br />
 						Experience</h1>
-					<p>15+ years building data-driven solutions across finance,<br />
-						manufacturing, aviation, and healthcare industries.</p>
+					<p>15+ years building data-driven and AI solutions across insurance,<br />
+						manufacturing, aviation, healthcare and cloud FinOps.</p>
 				</header>
 
 				<div class="experience-entry">
 					<h3>Data Scientist</h3>
-					<div class="company">Manulife &mdash; via TCS &bull; Toronto, Canada</div>
-					<p>Led cloud analytics and ML pipeline development on Azure. Designed and deployed an ML-based
-						anomaly detection system to identify abnormal Azure cloud spending across cost centers and
-						services. Built automated ETL pipelines using Python, Azure Data Factory, Databricks, and
-						PostgreSQL for daily ingestion and processing of billing data. Implemented real-time alerting
-						workflows using Azure Functions and delivered executive dashboards in Grafana and Power BI.
-						Directly contributed to <b>$12.8M CAD in annual savings</b>.</p>
+					<div class="company">Manulife &mdash; via TCS (Associate Consultant, Analytics &amp; Insights) &bull;
+						Jul 2020 &ndash; Present &bull; Toronto, Canada</div>
+					<ul>
+						<li><b>Delivered $12.8M CAD in annual savings</b> with a production anomaly-detection system
+							that forecasts expected Azure spend per cost centre and alerts owners to deviations, with
+							resource-level breakdowns.</li>
+						<li>Designed and deployed a <b>grounded multi-agent RAG service</b> (Flask, FAISS + BM25, Azure
+							AI Foundry) on <b>AKS behind Istio</b>. Answers are citation-backed, and the system refuses
+							below a confidence threshold instead of producing unverifiable output.</li>
+						<li>Built an enterprise <b>FinOps chargeback platform</b> on Databricks / PySpark, ADF and ADLS
+							Gen2: auditable cost-centre attribution, fair-share allocation of shared savings, and
+							invoice reconciliation.</li>
+						<li>Delivered end-to-end ML pipelines for credit risk, insurance pricing, fraud detection and
+							cloud cost optimisation, owning development, validation, deployment and monitoring.</li>
+						<li>Built BI and observability dashboards in Grafana and Power BI over PostgreSQL, including
+							snapshot-aware data-quality reporting and query-performance tracking across 50+
+							dashboards.</li>
+						<li>Automated Azure billing and reporting with Python and Azure Functions, and scheduled
+							refreshes with Azure Data Factory.</li>
+						<li>Presented model outputs, cost drivers and remediation recommendations to senior leadership
+							and finance stakeholders.</li>
+					</ul>
 				</div>
 
 				<div class="experience-entry">
 					<h3>Data Scientist</h3>
-					<div class="company">Tata Steel &mdash; via TCS &bull; India</div>
-					<p>Developed predictive analytics and statistical models for production optimization. Applied
-						supervised and unsupervised learning techniques&mdash;including regression, classification,
-						clustering, and PCA&mdash;to improve operational efficiency across manufacturing processes.
-						Built end-to-end ML pipelines from data engineering through model deployment and monitoring.</p>
+					<div class="company">Tata Steel &mdash; via TCS (Assistant Consultant, Analytics &amp; Insights) &bull;
+						Jun 2019 &ndash; Jul 2020 &bull; Kolkata, India</div>
+					<p>Applied statistical models to optimise the mild steel door production process, improving yield.
+						Developed supervised and unsupervised models (regression, clustering, PCA) to diagnose process
+						deviations, and designed forecasting and classification models using multivariate and logistic
+						regression, decision trees and time-series analysis. Experimented with model pruning and
+						quantization for predictive-maintenance models at the edge, and built KPI dashboards for
+						cross-functional teams.</p>
 				</div>
 
 				<div class="experience-entry">
 					<h3>Manager &mdash; Analytics</h3>
-					<div class="company">GMR / Delhi International Airport &bull; India</div>
-					<p>Spearheaded revenue analytics and KPI dashboard development using Power BI and Tableau. Built
-						business intelligence solutions that informed strategic decisions across airport operations and
-						commercial planning. Led a team responsible for data-driven reporting across multiple business
-						units.</p>
+					<div class="company">GMR &mdash; Delhi International Airport Ltd. &bull; Jul 2018 &ndash; Jun 2019 &bull;
+						New Delhi, India</div>
+					<p>Consolidated management reporting across all airport terminals for Non-Aero Commercial
+						reporting to the CCO and CEO, on Qlik Sense and Power BI. Designed data-driven campaigns that
+						generated <b>INR 2 Million in incremental revenue</b> across retail and F&amp;B segments.</p>
 				</div>
 
 				<div class="experience-entry">
 					<h3>Deputy Manager &mdash; Analytics</h3>
-					<div class="company">WNS &bull; India</div>
-					<p>Managed healthcare and FMCG analytics teams. Delivered market intelligence reports and leadership
-						dashboards, driving data-informed decision making across client engagements. Responsible for
-						stakeholder communication and translating analytical insights into business recommendations.</p>
+					<div class="company">WNS Global Services &bull; Dec 2017 &ndash; Jul 2018 &bull; Gurugram, India</div>
+					<p>Partnered with UK and USA clients across Healthcare and FMCG analytics. Led a team of 5 analysts
+						on financial and commercial reporting over IMS / Nielsen / IRI data in Power BI, and ran sales
+						and competitive-landscape analysis that identified high-growth consumer healthcare segments
+						across SE Asia.</p>
 				</div>
 
 			</section>
